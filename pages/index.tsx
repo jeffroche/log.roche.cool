@@ -2,6 +2,7 @@ import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
 import ItemList from "../components/ItemList";
+import * as types from "../types";
 
 export default function Home({ items }) {
   const posts = recordsToPosts(items);
@@ -84,7 +85,7 @@ export async function getServerSideProps() {
   return { props: { items: data.records } };
 }
 
-function recordsToPosts(records) {
+function recordsToPosts(records: types.AirtableItem[]): types.Item[] {
   const posts = records.map((r) => {
     return {
       id: r.id,
@@ -94,7 +95,7 @@ function recordsToPosts(records) {
       created: r.fields["Created (Override)"]
         ? r.fields["Created (Override)"]
         : r.fields.Created,
-      link: r.fields.link,
+      link: r.fields.Link,
     };
   });
   return posts;
