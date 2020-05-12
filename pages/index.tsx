@@ -1,4 +1,4 @@
-import fetch from "isomorphic-unfetch";
+import { GetStaticProps } from 'next'
 import Head from "next/head";
 
 import ItemList from "../components/ItemList";
@@ -71,7 +71,7 @@ export default function Home({ items }) {
   );
 }
 
-export async function getServerSideProps() {
+export const getStaticProps: GetStaticProps = async context => {
   const resp = await fetch(
     "https://api.airtable.com/v0/appyCRV9pIaeq29gR/Posts",
     {
@@ -82,7 +82,7 @@ export async function getServerSideProps() {
     }
   );
   const data = await resp.json();
-  return { props: { items: data.records } };
+  return { props: { items: data.records }, unstable_revalidate: 1 };
 }
 
 function recordsToPosts(records: types.AirtableItem[]): types.Item[] {
