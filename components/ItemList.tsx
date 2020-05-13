@@ -10,6 +10,12 @@ export default function ItemList({ items }: ItemListProps) {
   return (
     <ul>
       {itemElements}
+      <style jsx>{`
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+      `}</style>
     </ul>
   )
 }
