@@ -6,6 +6,14 @@ import * as types from "../types";
 
 export default function Home({ items }) {
   const posts = recordsToPosts(items);
+  posts.sort((a, b) => {
+    // newest to oldest
+    if (a.created < b.created) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
   return (
     <div>
       <Head>
@@ -13,20 +21,12 @@ export default function Home({ items }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="container mx-auto max-w-xl pt-4">
         <h1 className="title">Jeff's Tumblog</h1>
         <ItemList items={posts} />
       </main>
 
       <footer></footer>
-
-      <style jsx global>{`
-        body {
-          font-family: Liberation Sans, Arial, sans-serif;
-          background-color: #f2f7ee;
-          line-height: 1.5;
-        }
-      `}</style>
     </div>
   );
 }
