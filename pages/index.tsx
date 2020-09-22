@@ -1,19 +1,24 @@
 import { GetStaticProps } from 'next'
 import Head from "next/head";
+import { useState } from "react";
 
 import ItemList from "../components/ItemList";
+import TypeDropdown from "../components/TypeDropdown";
+import YearDropdown from "../components/YearDropdown";
 import * as types from "../types";
 
 export default function Home({ items }) {
-  const posts = recordsToPosts(items);
-  posts.sort((a, b) => {
-    // newest to oldest
-    if (a.created < b.created) {
-      return 1;
-    } else {
-      return -1;
-    }
-  });
+  let posts = recordsToPosts(items);
+  const [typeFilter, setTypeFilter] = useState<types.ItemTypes | "">("");
+  const [yearFilter, setYearFilter] = useState<string>("");
+  if (typeFilter) {
+    console.log("Filtering type", typeFilter);
+    posts = posts.filter(p => p.type === typeFilter);
+  }
+  if (yearFilter) {
+    console.log("Filtering year", yearFilter);
+    posts = posts.filter(p => p.created.startsWith(yearFilter));
+  }
   return (
     <div>
       <Head>
@@ -23,6 +28,14 @@ export default function Home({ items }) {
 
       <main className="container mx-auto max-w-xl pt-4">
         <h1 className="title">Jeff's Tumblog</h1>
+        <div className="flex flex-row">
+          <div className="pr-2">
+            <TypeDropdown typeSelected={typeFilter} changeHandler={setTypeFilter} />
+          </div>
+          <div>
+            <YearDropdown yearSelected={yearFilter} changeHandler={setYearFilter} />
+          </div>
+        </div>
         <ItemList items={posts} />
       </main>
 
