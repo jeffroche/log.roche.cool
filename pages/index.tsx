@@ -32,17 +32,37 @@ export default function Home({ items }) {
 }
 
 export const getStaticProps: GetStaticProps = async context => {
-  const resp = await fetch(
-    "https://api.airtable.com/v0/appyCRV9pIaeq29gR/Posts",
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.AIRTABLE_KEY}`,
-      },
+  let more = true;
+  let items = [];
+  const baseUrl = "https://api.airtable.com/v0/appyCRV9pIaeq29gR/Posts";
+  let page = 1;
+  const queryParams = new URLSearchParams();
+  while (more) {
+    console.log(`Fetching page ${page}`);
+    const url = baseUrl + "?" + queryParams.toString();
+    const resp = await fetch(
+      url,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.AIRTABLE_KEY}`,
+        },
+      }
+    );
+    const data = await resp.json();
+    if (!resp.ok) {
+      console.log("Error calling airtable", resp.status, data);
+      more = false;
     }
-  );
-  const data = await resp.json();
-  return { props: { items: data.records }, unstable_revalidate: 1 };
+    items = [...items, ...data.records];
+    if ("offset" in data) {
+      queryParams.set("offset", data.offset);
+      ++page;
+    } else {
+      more = false;
+    }
+  }
+  return { props: { items }, unstable_revalidate: 1 };
 }
 
 function recordsToPosts(records: types.AirtableItem[]): types.Item[] {
