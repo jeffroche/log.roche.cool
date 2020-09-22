@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps = async context => {
   const baseUrl = "https://api.airtable.com/v0/appyCRV9pIaeq29gR/Posts";
   let page = 1;
   const queryParams = new URLSearchParams();
+  queryParams.append("view", "To Show");
   while (more) {
     console.log(`Fetching page ${page}`);
     const url = baseUrl + "?" + queryParams.toString();
