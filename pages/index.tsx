@@ -76,7 +76,7 @@ export const getStaticProps: GetStaticProps = async context => {
       more = false;
     }
   }
-  return { props: { items }, unstable_revalidate: 1 };
+  return { props: { items }, revalidate: 1 };
 }
 
 function recordsToPosts(records: types.AirtableItem[]): types.Item[] {
