@@ -12,11 +12,9 @@ export default function Home({ items }) {
   const [typeFilter, setTypeFilter] = useState<types.ItemTypes | "">("");
   const [yearFilter, setYearFilter] = useState<string>("");
   if (typeFilter) {
-    console.log("Filtering type", typeFilter);
     posts = posts.filter(p => p.type === typeFilter);
   }
   if (yearFilter) {
-    console.log("Filtering year", yearFilter);
     posts = posts.filter(p => p.created.startsWith(yearFilter));
   }
   return (
@@ -27,9 +25,9 @@ export default function Home({ items }) {
       </Head>
 
       <main className="container mx-auto max-w-xl pt-4">
-        <h1 className="title">Jeff's Tumblog</h1>
+        <h1 className="title mb-4">Jeff's Tumblog</h1>
         <div className="flex flex-row">
-          <div className="pr-2">
+          <div className="pr-4">
             <TypeDropdown typeSelected={typeFilter} changeHandler={setTypeFilter} />
           </div>
           <div>
