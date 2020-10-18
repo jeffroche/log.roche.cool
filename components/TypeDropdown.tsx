@@ -1,5 +1,5 @@
-import { type } from "os";
 import * as types from "../types";
+import { emojiForItemType } from "../utils";
 
 interface Props {
   typeSelected: types.ItemTypes | "";
@@ -15,7 +15,7 @@ const TypeDropdown: React.FC<Props> = ({
         Filter by type
       </label>
       <select
-        className="bg-default border h-8"
+        className="bg-white border h-8"
         value={typeSelected}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const valAsType = coerceItemTypeSelection(e.currentTarget.value);
@@ -23,10 +23,10 @@ const TypeDropdown: React.FC<Props> = ({
         }}
       >
         <option value="">--</option>
-        <option value={types.ItemTypes.Article}>Article - 📰</option>
-        <option value={types.ItemTypes.Book}>Book - 📖</option>
-        <option value={types.ItemTypes.Movie}>Movie - 🍿</option>
-        <option value={types.ItemTypes.Music}>Music - 🎶</option>
+        <option value={types.ItemTypes.Article}>Article - {emojiForItemType(types.ItemTypes.Article)}</option>
+        <option value={types.ItemTypes.Book}>Book - {emojiForItemType(types.ItemTypes.Book)}</option>
+        <option value={types.ItemTypes.Movie}>Movie - {emojiForItemType(types.ItemTypes.Movie)}</option>
+        <option value={types.ItemTypes.Music}>Music - {emojiForItemType(types.ItemTypes.Music)}</option>
       </select>
     </div>
   )

@@ -1,7 +1,7 @@
-import ItemTimestamp from "./ItemTimestamp";
+import ItemComment from './ItemComment';
 import ItemEmoji from "./ItemEmoji";
+import ItemTimestamp from "./ItemTimestamp";
 import * as types from "../types";
-import { emojiForItemType } from "../utils";
 
 interface ItemProps {
   item: types.Item;
@@ -18,12 +18,8 @@ export default function Item({ item }: ItemProps) {
         </div>
         {item.comment ?
           <div className="m-1">
-            <div className="border-b">
-              <ItemEmoji itemType={item.type} /><a href={item.link}>{item.name}</a>
-            </div>
-            <div>
-              {item.comment ? <div>{item.comment}</div> : null}
-            </div>
+            <ItemEmoji itemType={item.type} /><a href={item.link}>{item.name}</a>
+            <ItemComment comment={item.comment} />
           </div> :
           <div className="m-1">
             <div>
