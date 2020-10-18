@@ -24,7 +24,7 @@ export default function Home({ items }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto max-w-xl pt-4">
+      <main className="container mx-auto max-w-xl pt-4 px-1">
         <h1 className="title mb-4">Jeff's Tumblog</h1>
         <div className="flex flex-row">
           <div className="pr-4">

@@ -10,7 +10,7 @@ interface ItemProps {
 export default function Item({ item }: ItemProps) {
   return (
     <li>
-      <div className="item my-2 px-2">
+      <div className="item my-2 sm:px-1">
         <div className="flex flex-row items-center justify-between">
           <div className="m-1">
             <ItemTimestamp ts={item.created} />
