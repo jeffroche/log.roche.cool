@@ -1,6 +1,7 @@
 import ItemTimestamp from "./ItemTimestamp";
-import ItemTypeIcon from "./ItemTypeIcon";
+import ItemEmoji from "./ItemEmoji";
 import * as types from "../types";
+import { emojiForItemType } from "../utils";
 
 interface ItemProps {
   item: types.Item;
@@ -9,11 +10,8 @@ interface ItemProps {
 export default function Item({ item }: ItemProps) {
   return (
     <li>
-      <div className="border-2 my-2">
-        <div className="flex flex-row items-center justify-between border-b">
-          <div className="m-1">
-            <ItemTypeIcon postType={item.type} />
-          </div>
+      <div className="item my-2 px-2">
+        <div className="flex flex-row items-center justify-between">
           <div className="m-1">
             <ItemTimestamp ts={item.created} />
           </div>
@@ -21,7 +19,7 @@ export default function Item({ item }: ItemProps) {
         {item.comment ?
           <div className="m-1">
             <div className="border-b">
-              <a href={item.link}>{item.name}</a>
+              <ItemEmoji itemType={item.type} /><a href={item.link}>{item.name}</a>
             </div>
             <div>
               {item.comment ? <div>{item.comment}</div> : null}
@@ -29,6 +27,7 @@ export default function Item({ item }: ItemProps) {
           </div> :
           <div className="m-1">
             <div>
+              <ItemEmoji itemType={item.type} />
               {item.link ?
                 <a href={item.link}>{item.name}</a> :
                 <span>{item.name}</span>

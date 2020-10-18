@@ -17,5 +17,5 @@ export default function ItemTimestamp({ ts }: ItemTimestampProps) {
   }
 
   const dateStr = `${year}-${month}-${day}`;
-  return <time dateTime={ts}>{dateStr}</time>;
+  return <time className="text-sm" dateTime={ts}>{dateStr}</time>;
 }

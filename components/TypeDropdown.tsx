@@ -15,7 +15,7 @@ const TypeDropdown: React.FC<Props> = ({
         Filter by type
       </label>
       <select
-        className="bg-green-100 border h-8"
+        className="bg-default border h-8"
         value={typeSelected}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           const valAsType = coerceItemTypeSelection(e.currentTarget.value);

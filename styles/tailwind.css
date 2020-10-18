@@ -1,8 +1,12 @@
 /* purgecss start ignore */
 @tailwind base;
 
+.bg-default {
+  @apply bg-gray-100;
+}
+
 body {
-  @apply min-h-screen bg-green-100;
+  @apply min-h-screen bg-default;
 }
 
 h1 {
@@ -15,7 +19,11 @@ h3 {
   @apply text-lg;
 }
 a {
-  @apply text-green-700 underline;
+  @apply text-gray-700 underline;
+}
+
+.item {
+  @apply bg-white border-2 rounded-md;
 }
 
 @tailwind components;

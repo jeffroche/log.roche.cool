@@ -21,7 +21,7 @@ const YearDropdown: React.FC<Props> = ({
         Filter by year
       </label>
       <select
-        className="bg-green-100 border h-8"
+        className="bg-default border h-8"
         value={yearSelected}
         onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
           changeHandler(e.currentTarget.value);
